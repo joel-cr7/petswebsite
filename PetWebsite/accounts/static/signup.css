@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Century Gothic', sans-serif;
+  font-weight: 500;
+  
+}
+body{
+  background-image: url("images/background-edit.png");
+  background-size: cover;
+}
+.card{
+  margin: auto;
+  margin-top: 1%;
+  width: 600px;
+  height: 600px;
+}
+
+button{
+  background-image: linear-gradient(to right, #FF8008, #FFC837);
+  padding-top: 100px;
+}
+
+
+.btn.btn-primary{
+  margin-top: -15%;
+  margin-bottom: 2%;
+}
+.btn.btn-primary label{
+  font-size: 30px;
+}
+
+#passwordHelpBlock p{
+  font-size: 10px;
+}
+.inside-content{
+  margin-top: 1.5%;
+}
+.header-text{
+  text-align: center;
+  font-size: 40px;
+}
+.link-login {
+  text-align: center;
+  margin-top: 1%;
+  margin-bottom:3%;
+}
+.link-login a{
+  text-decoration: none;
+  color: #FF8008;
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-device-width: 320px) and (max-device-width: 480px) {
+  
+  .card{
+    margin-top: 15%;
+    width: 300px;
+    height: 550px;
+  }
+  .inside-content{
+    font-size: 15px;
+    font-weight: 300;
+  }
+  .header-text h1{
+    font-size: 20px;
+  }
+  .btn.btn-primary h1{
+    font-size: 15px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+  .form-check p{
+    font-size: 12px;
+    font-weight: 200;
+    
+  }
+  .link-login a{
+    font-size: 12px;
+  }
+  body{
+    background-image: url("images/mobile-background-edit.png");
+  }
+}

@@ -1,0 +1,211 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+    
+}
+body
+{
+    font-family: "Times New Roman", Times, serif;
+}
+#nav-bar
+{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.navbar
+{
+    background-image: linear-gradient(to right, #FF8008, #FFC837);
+    padding: 0 !important;
+}
+.navbar-brand img
+{
+    height: 4vw;
+    padding-left: 1vw;
+   
+}
+.navbar-nav
+{
+    padding: 0 0px;
+}
+.navbar-nav
+{
+    color: #fff;
+    font-weight: 400;
+    font-size: 20;
+}
+.navbar-toggler
+    {
+        font-size: 60px;
+        padding-right: -10px;
+    }
+.fa-bars
+{
+    color: #fff;
+    font-size: 30px;
+}
+button {
+        display:inline-block;
+        background-color: darkorange;
+        border-radius: 12px;
+        border: 4px double lightgray;
+        color: #FFF;
+        text-align: center;
+        font-size: 28px;
+        padding: 5px;
+        width: 80px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+}
+button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+      }
+      button span:after {
+        content: '\00bb';
+        position: sticky;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+      }
+      button:hover {
+        background-color: lightgoldenrodyellow;
+        color: darkorange;
+        border: 4px double darkorange;
+        border-radius: 12px;
+      }
+      button:hover span {
+        padding-right: 25px;
+      }
+      button:hover span:after {
+        opacity: 1;
+        right: 0;
+      }
+/*--------BANNER SECTION---------*/
+
+#banner
+{
+    background-image: linear-gradient(to right, #FF8008, #FFC837);
+    color: #fff;
+    padding-top: 0%;
+    padding-right: 0%;
+    width: 100%;
+}
+.promo-title
+{
+    font-size: 4vw;
+    font-weight: 600;
+    text-align: left;
+    margin-left: 5vw;
+    font-family: "Sofia", sans-serif;
+    overflow-y: hidden;
+    text-decoration: underline;
+}
+.caption-title
+{
+    font-size: 2vw;
+    margin-left: 5vw;
+    margin-top: -1vw;
+    text-align: left;
+    font-family: "Times New Roman", Times, serif;
+    text-decoration-style: double;
+}
+.pet-image
+{
+    width: 94%;
+    align-content: center;
+    margin-top: -20.35%;
+    margin-left: 4%;
+}
+.banner-curve
+{
+    width: 25%;
+    margin-left: -2.5%;
+    margin-top: -2.5%;
+}
+
+
+/*--------DEVICES SECTION---------*/
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-device-width: 320px) and (max-device-width: 480px) {
+.navbar-brand img
+    {
+        height: 30px;
+        padding-left: 0px;
+    }
+.promo-title
+    {
+        font-size: 30px;
+    }
+.caption-title
+    {
+        font-size: 15px;
+        margin-top: -1vw;  
+    }
+.banner-curve
+    {
+        display: none;
+    }
+.fa-bars
+    {
+        padding-right: -5px;
+    }
+.navbar-toggler
+    {
+        padding-right: -10px;
+    }
+.pet-image
+    {
+        width: 110%;
+        margin-top: -15px;
+        margin-left: -15px;
+    }
+.nav-item
+    {
+        font-size: 14px;    
+    }
+.d-flex
+    {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registered</title>
+</head>
+<body>
+
+    <!-- To know if someone is logged in -->
+    {% if request.user.is_authenticated %}
+        <h3>Successful register</h3>
+        <p>hello, {{request.user.username}} | <button><a href="{% url 'logout' %}">Logout</a></button></p>
+    {% else %}
+        <p><button><a href="{% url 'signup' %}">register</a></button> | <button><a href="#">login</a></button></p>    
+    {% endif %}
+    
+    
+</body>
+</html>
