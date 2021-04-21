@@ -2,14 +2,50 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from accounts.forms import RegistrationForm
 from django.http import HttpResponse
+
 # from django.http import HttpResponse
 # from django.contrib import auth
 # from django.contrib.auth.models import User
 # from .models import customUser
 
-# # Create your views here.
+# Create your views here.
 def login_view(request):
-    return render(request,'accounts/login.html')
+    context= {}
+    if request.method == 'POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+
+        user=authenticate(request, username=username, password=password)
+
+        if user is not None:    # if username and password is correct
+            login(request, user)
+            return HttpResponse("User logged in successfully")
+        else:       # if username or password incorrect
+            context['login_form']="Invalid username or password !!"
+
+
+
+    return render(request,'accounts/login.html', context)
+    # user=request.user
+    # if user.is_authenticated:
+    #     return HttpResponse("User logged in successfully")
+
+    # if request.POST:
+    #     form=LoginAuthenticationForm(request.POST)
+    #     if form.is_valid():
+    #         username=request.POST['username']
+    #         password=request.POST['password']
+    #         user=authenticate(username=username, password=password)
+                            
+    #         if user:
+    #             login(request, user)
+    #             return HttpResponse("User logged in successfully")
+
+    # else:
+    #     form=LoginAuthenticationForm()
+
+    # context['login_form']=form
+    # return render(request,'accounts/login.html', context)
     # return render(request,'accounts/login.html')
     # if request.method=="POST":
     #     user=auth.authenticate(username=request.POST['username'],password=request.POST['password'])
@@ -63,7 +99,7 @@ def registration_view(request):
 #         return render(request,'accounts/signup.html')
 
 
-# To logout the user
-# def logout_view(request):
-#     logout(request)
-#     return redirect('disp')
+#To logout the user
+def logout_view(request):
+    logout(request)
+    return redirect('login')

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import Account
+from django.contrib.auth import authenticate
 
 
 # As we created custom user models so we need to create custom registration forms
@@ -17,3 +18,23 @@ class RegistrationForm(UserCreationForm):
         # metioning what the registration form will look like
         # All these fields will be visible in the form
         fields = ("first_name", "last_name", "email", "phone_no", "username", "password1", "password2")   
+
+
+
+
+# class LoginAuthenticationForm(forms.Form):
+#     username=forms.CharField(label='username')
+#     password=forms.CharField(label='password',widget=forms.PasswordInput)
+
+    # class Meta:
+    #     model=Account
+    #     # metioning what the login form will look like
+    #     # All these fields will be visible in the form
+    #     fields=('username','password')
+
+    #     # this is called before the form is submitted  
+    #     def clean(self):
+    #         username=self.cleaned_data['username']
+    #         password=self.cleaned_data['password']
+    #         if not authenticate(username=username, password=password):
+    #             raise forms.ValidationError("Invalid login")

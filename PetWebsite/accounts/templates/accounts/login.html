@@ -19,6 +19,8 @@
 
 
 
+
+
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -36,32 +38,51 @@
   <body>
     <div class="card">
       <div class="card-body">
+
         <forms>
           
-            <div class="header-text">
-              <label>Login</label>
-            </div>
-            <div class = "inside-content">
-            <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-6 col-form-label">Email</label>
-              <div class="col-sm-6">
-                <input type="email" class="form-control form-control-sm" id="inputEmail3">
+          <div class="header-text">
+            <label>Login</label>
+          </div>
+
+          <div class = "inside-content">
+
+            <form method="post"> 
+              {% csrf_token %}
+              {{login_form.non_field_errors}}
+
+              <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-6 col-form-label">Username</label>
+                <div class="col-sm-6">
+                  <input type="username" name="username" autofocus placeholder="Username" class="form-control form-control-sm" id="inputEmail3">
+                </div>
               </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-sm-6 col-form-label">Password</label>
-              <div class="col-sm-6">
-                <input type="password" class="form-control form-control-sm" id="inputPassword3">
+
+
+              <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-6 col-form-label">Password</label>
+                <div class="col-sm-6">
+                  <input type="password" name="password" placeholder="Password" class="form-control form-control-sm" id="inputPassword3">
+                </div>
               </div>
-            </div>
-            
-            </div>
+
+                {% if login_form %}
+                  <p><small class="text-danger" style="font-size: 11px;">{{ login_form }}</small></p>
+                {% endif %}
+
+              <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-primary btn-sm">
+                  Login
+                </button>
+              </div>
+              
+            </form>
+          </div>
+
         </forms>
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="submit" class="btn btn-primary btn-sm">
-                <label>Login</label>
-            </button>
-        </div>
+
+        
+        
 
         <div class="forgot-password">
           <a href="">Forgot password?</a>
@@ -73,6 +94,12 @@
 
       </div>
     </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
   </body>
 </html>
+
+
+
+
