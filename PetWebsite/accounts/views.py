@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from accounts.forms import RegistrationForm
 from django.http import HttpResponse
-from django.views.decorators.csrf import  csrf_exempt
-import razorpay
+
 
 # from django.http import HttpResponse
 # from django.contrib import auth
@@ -21,7 +20,7 @@ def login_view(request):
 
         if user is not None:    # if username and password is correct
             login(request, user)
-            return HttpResponse("login successful")
+            return render(request, 'shop/home.html')
         else:       # if username or password incorrect
             context['login_form']="Invalid username or password !!"
 
@@ -75,7 +74,7 @@ def registration_view(request):
             raw_password = form.cleaned_data.get('password1')
             account = authenticate(username=username, password=raw_password)
             login(request, account)
-            return HttpResponse("Successfully Registered in")
+            return render(request, 'shop/home.html')
         else:
             context['registration_form'] = form     # if form not valid, then too send that errenous form to the template
     else:                                        # for get request
@@ -100,17 +99,6 @@ def registration_view(request):
 #     else:
 #         return render(request,'accounts/signup.html')
 
-def final_payment(request):
-        amount = 50000
-        order_currency = 'INR'
-        client = razorpay.Client(auth=("rzp_test_K6oU8xWPGy6n1V", "J4oEY2ECYRja6NDw3kmPTfrs"))
-        payment = client.order.create(dict(amount=amount, currency='INR')) 
-        return render(request, 'accounts/demo.html', {'payment':payment})
-
-
-@csrf_exempt
-def success(request):
-    return HttpResponse("successfully paid !!")
 
 
 

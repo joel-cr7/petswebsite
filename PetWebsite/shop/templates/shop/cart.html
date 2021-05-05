@@ -1,0 +1,91 @@
+{% extends 'shop/main.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="row my-3 mx-5">
+    <div class="col-lg-12">
+
+        <div class="box-element">
+
+            <a class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190; Continue Shopping</a>
+
+            <br>
+            <br>
+            <table class="table">
+                <tr>
+                    <th>
+                        <h5>Items: <strong>{{order.get_cart_items}}</strong></h5>
+                    </th>
+                    <th>
+                        <h5>Total:<strong> ${{order.get_cart_total}}</strong></h5>
+                    </th>
+                    <th>
+                        <form action="{% url 'success' %}" method="POST" style="float:right; margin:5px;">
+                            <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                data-key="rzp_test_K6oU8xWPGy6n1V" 
+                                data-amount= {{money}}
+                                data-currency="INR"
+                                data-order_id="{{ payment.id }}" 
+                                data-buttontext="Pay with Razorpay"
+                                data-name="Pet Supplies Website" 
+                                data-description="demo"
+                                data-image="https://example.com/your_logo.jpg" 
+                                data-prefill.name="joel"
+                                data-prefill.email="joel@example.com" 
+                                data-theme.color="#39FF14"> </script>
+                        </form>
+                        <!-- <a style="float:right; margin:5px;" class="btn btn-success"
+                            href="{% url 'payment' %}">Checkout</a> -->
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+
+        <br>
+
+        <div class="box-element">
+
+            <div class="cart-row">
+                <div style="flex:2"></div>
+                <div style="flex:2"><strong>Item</strong></div>
+                <div style="flex:1"><strong>Price</strong></div>
+                <div style="flex:1"><strong>Quantity</strong></div>
+                <div style="flex:1"><strong>Total</strong></div>
+            </div>
+
+
+            {% for item in items %}
+
+            <div class="cart-row">
+                <div style="flex:2"><img class="row-image" src="/media/{{item.product.images}}"></div>
+                <div style="flex:2">
+                    <p>{{item.product.product_name}}</p>
+                </div>
+                <div style="flex:1">
+                    <p>${{item.product.our_price}}</p>
+                </div>
+                <div style="flex:1">
+                    <p class="quantity">{{item.quantity}}</p>
+                    <div class="quantity">
+                        <img class="chg-quantity" src="{% static  'images/arrow-up.png' %}">
+
+                        <img class="chg-quantity" src="{% static  'images/arrow-down.png' %}">
+                    </div>
+                </div>
+                <div style="flex:1">
+                    <p>${{item.get_total}}</p>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock content %}

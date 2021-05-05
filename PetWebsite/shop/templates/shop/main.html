@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen - bootstrap 4 navbar</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css'>
+    <!-- CSS -->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <nav class="navbar navbar-expand-custom navbar-mainbg">
+        <a class="navbar-brand navbar-logo" href="{% url 'home' %}">Pet Shop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <div class="hori-selector">
+                    <div class="left"></div>
+                    <div class="right"></div>
+                </div>
+                <li class="nav-item active">
+                    <a class="nav-link" id="food-nav"><i class="fas fa-bone"></i>Food</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" id="supply-nav"><i class="fas fa-prescription-bottle-alt"></i>Supplies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="toys-nav"><i class="fas fa-paw"></i></i>Toys</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Calendar</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void();"><i class="far fa-chart-bar"></i>Cart</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="temp.html"><i class="far fa-unlock"></i>Documents</a>
+                </li> -->
+            </ul>
+
+            <div class="form-inline my-2 my-lg-0 mx-2">
+                <a href="#" class="btn btn-warning my-2">Login</a>
+
+                <a href="{% url 'cart' %}">
+                    <img id="cart-icon" src="{% static 'images/cart.png' %}">
+                </a>
+                <p id="cart-total">0</p>
+            </div>
+
+        </div>
+    </nav>
+
+
+
+    {% block content %}
+
+
+
+    {% endblock content %}
+
+
+
+
+    <!-- partial -->
+    <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'home.js' %}"></script>
+
+
+
+</body>
+
+</html>
