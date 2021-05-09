@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import Account
+from shop.models import Customer
 from django.contrib.auth import authenticate
+from django.forms import ModelForm
 
 
 # As we created custom user models so we need to create custom registration forms
@@ -20,6 +22,11 @@ class RegistrationForm(UserCreationForm):
         fields = ("first_name", "last_name", "email", "phone_no", "username", "password1", "password2")   
 
 
+
+class cust_form(ModelForm):
+    class Meta:
+        model=Customer
+        fields = ()   
 
 
 # class LoginAuthenticationForm(forms.Form):

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from accounts.forms import RegistrationForm
+from accounts.forms import RegistrationForm, cust_form
 from django.http import HttpResponse
 
 
@@ -64,8 +64,14 @@ def registration_view(request):
     context = {}
     if request.POST:                             # for post request
         form = RegistrationForm(request.POST)
-        if form.is_valid():                      # if user entered proper format of info
-            form.save()
+        customer_form = cust_form(request.POST)
+        if form.is_valid() and customer_form.is_valid():                      # if user entered proper format of info
+            register_form=form.save()
+            c_form=customer_form.save(False)
+            c_form.user=register_form
+            c_form.name=register_form.first_name
+            c_form.email=register_form.email
+            c_form.save()
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
             phone_no = form.cleaned_data.get('phone_no')
@@ -79,7 +85,9 @@ def registration_view(request):
             context['registration_form'] = form     # if form not valid, then too send that errenous form to the template
     else:                                        # for get request
         form = RegistrationForm()
+        customer_form=cust_form()
         context['registration_form'] = form
+        context['customer_form'] = customer_form
     return render(request,'accounts/signup.html', context)
 #     if request.method == "POST":
 #         if request.POST['password1'] == request.POST['password2']:

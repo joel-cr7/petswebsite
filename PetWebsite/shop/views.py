@@ -4,13 +4,14 @@ import razorpay
 from django.http import HttpResponse
 from accounts.views import login_view, registration_view, logout_view
 from . models import *
+from django.contrib import messages
 # Create your views here.
 
 
 def home(request):
         products= Product.objects.all()    
         n= len(products)
-        return render(request, 'shop/home.html', {'product':products})
+        return render(request, 'shop/homeM.html', {'product':products})
 
 
 def cart(request):
@@ -18,12 +19,16 @@ def cart(request):
                 customer=request.user.customer
                 order, created=Order.objects.get_or_create(customer=customer, complete=False)
                 items=order.orderitem_set.all()
+                pay=order.get_cart_total*100
+                context={'items':items, 'order':order,'money':pay}
+                return render(request, 'shop/cart.html', context)
         else:
-                items=[]
-                order={'get_cart_total':0, 'get_cart_items':0}
-        pay=order.get_cart_total*100
-        context={'items':items, 'order':order,'money':pay}
-        return render(request, 'shop/cart.html', context)
+                messages.error(request,'Please Login or Signup')
+                return redirect('home')
+                # items=[]
+                # order={'get_cart_total':0, 'get_cart_items':0}
+                
+        
 
 
 def final_payment(request):
