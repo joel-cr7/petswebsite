@@ -1,122 +1,198 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
+html {
+  height: 100%;
+}
+body {
+  margin:0;
+  padding:0;
+  font-family: 'Century Gothic', sans-serif;
+  background: linear-gradient(#141e30, #243b55);
+}
+
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.5);
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-  
-  
-}
-body{
-  background-image: url("images/background-edit.png");
-  background-size: cover;
-}
-.card{
-  
-  width: 500px;
-  margin: auto;
-  margin-top: 25px;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
 }
 
-button{
-  background-image: linear-gradient(to right, #FF8008, #FFC837);
-  
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color:#0c131d;
+  text-align: center;
 }
 
+.login-box .user-box {
+  position: relative;
+}
 
-.btn.btn-primary{
-    border-radius: 10px;
-    width: 80%;
-    height: 120%;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    
-}
-.btn.btn-primary p{
-  font-size: 12px;
-  font-weight: 600;
-  margin: auto;
-}
-#passwordHelpBlock p{
-  font-size: 9px;
-}
-.inside-content{
-  
-  display: block;
+.login-box .user-box input {
   width: 100%;
-  height: 8%;
-  margin-top: 3%;
-
+  padding: 10px 0;
+  font-size: 16px;
+  color: #0c131d;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #0c131d;
+  outline: none;
+  background: transparent;
 }
-.col-form-label p{
+.login-box .user-box label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #0c131d;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #0c131d;
   font-size: 12px;
-  font-weight: 600;
-  height: 50%;
 }
-.header-text h1{
-  text-align: center;
-  font-size: 25px;
 
-}
-.link-login {
-
-  text-align: center;
-  margin-top: 2%;
+.login-box form .submit-button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 40px;
+  color: #0c131d;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: -3px;
+  letter-spacing: 4px;
+  margin-left: 82px;
+  
   
 }
 
-.link-login a{
-  text-decoration: solid;
-  color: #FF8008;
-  font-size: 12px;
+.login-box .submit-button:hover {
+  background: #0c131d;
+  color:#fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #44749c,
+              0 0 25px #44749c,
+              0 0 50px #44749c,
+              0 0 100px #44749c;
 }
 
-
-
-label{
+.login-box .submit-button span {
+  position: absolute;
   display: block;
+}
+
+
+.login-box .submit-button span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
   height: 2px;
-  
-}
-lottie-player{
-  margin-left: 350px;
-  margin-top: -8%;
+  background: linear-gradient(90deg, transparent, #0c131d);
+  animation: btn-anim1 1s linear infinite;
 }
 
-/* 
-  ##Device = Most of the Smartphones Mobiles (Portrait)
-  ##Screen = B/w 320px to 479px
-*/
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,100% {
+    left: 100%;
+  }
+}
 
-@media (min-device-width: 320px) and (max-device-width: 480px) {
-  
-  .card{
-    margin-top: 15%;
-    width: 300px;
-    height: 650px;
+.login-box .submit-button span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #0c131d);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
   }
-  .inside-content{
-    font-size: 15px;
-    font-weight: 300;
+  50%,100% {
+    top: 100%;
   }
-  .header-text h1{
-    font-size: 20px;
+}
+
+.login-box .submit-button span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #0c131d);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
   }
-  .btn.btn-primary h1{
-    font-size: 15px;
-    margin-top: 2%;
-    margin-bottom: 2%;
+  50%,100% {
+    right: 100%;
   }
-  .form-check p{
-    font-size: 12px;
-    font-weight: 200;
-    
+}
+
+.login-box .submit-button span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent,#0c131d);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
   }
-  .link-login a{
-    font-size: 12px;
+  50%,100% {
+    bottom: 100%;
   }
-  body{
-    background-image: url("images/mobile-background-edit.png");
-  }
+}
+
+
+
+.signup-text p{
+
+color:#0c131d;
+text-align: center;
+margin-bottom: -25px;
+}
+
+
+
+.signup-text p:hover{
+color: #fff;
+text-shadow: 2px 2px 2px #44749c,
+            2px 2px 2px #44749c,
+            2px 2px 2px #44749c,
+            2px 2px 2px #44749c;
+}
+
+input:required {
+box-shadow:none;
+}
+input:invalid {
+box-shadow: none;
 }
