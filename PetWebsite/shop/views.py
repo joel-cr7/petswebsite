@@ -16,9 +16,19 @@ def home(request):
                 order, created=Order.objects.get_or_create(customer=customer, complete=False)
                 items=order.orderitem_set.all()
                 cartitems = order.get_cart_items
-                products= Product.objects.all()    
-                # n= len(products)
-                return render(request, 'shop/homeM.html', {'product':products, 'ci':cartitems})  
+                products= Product.objects.all()  
+                all_prods = []
+                j=1
+                for i in products:
+                        if j<=15:
+                                all_prods.append(i)
+                                j+=1
+                        else:
+                                break
+
+                dog_products = Product.objects.filter(category__icontains='dog')
+
+                return render(request, 'shop/finalHome.html', {'product':all_prods, 'ci':cartitems, 'dog_products':dog_products})  
         else:
                 return redirect('login')
 
@@ -27,16 +37,34 @@ def home(request):
 
 def start_page(request):
         if request.user.is_authenticated:
-                customer=request.user.customer
-                order, created=Order.objects.get_or_create(customer=customer, complete=False)
-                items=order.orderitem_set.all()
-                cartitems = order.get_cart_items
-                products= Product.objects.all()    
-                # n= len(products)
-                return render(request, 'shop/homeM.html', {'product':products, 'ci':cartitems})
+                return redirect('home')
+                # customer=request.user.customer
+                # order, created=Order.objects.get_or_create(customer=customer, complete=False)
+                # items=order.orderitem_set.all()
+                # cartitems = order.get_cart_items
+                # products= Product.objects.all()   
+                # all_prods = []
+                # j=1
+                # for i in products:
+                #         if j<=15:
+                #                 all_prods.append(i)
+                #                 j+=1
+                #         else:
+                #                 break
+ 
+                # # n= len(products)
+                # return render(request, 'shop/finalHome.html', {'product':all_prods, 'ci':cartitems})
         else:
-                products= Product.objects.all()  
-                return render(request, 'shop/homeM.html', {'product':products})
+                products= Product.objects.all() 
+                all_prods = []
+                j=1
+                for i in products:
+                        if j<=15:
+                                all_prods.append(i)
+                                j+=1
+                        else:
+                                break
+                return render(request, 'shop/finalHome.html', {'product':all_prods})
 
 def cart(request):
         if request.user.is_authenticated:
@@ -95,3 +123,5 @@ def updateItem(request):
         if orderItem.quantity <= 0:
                 orderItem.delete()
         return JsonResponse('item was added', safe=False) 
+
+

@@ -1,5 +1,10 @@
-<!DOCTYPE html>
+{% extends 'shop/main.html' %}
 {% load static %}
+
+{% comment %}
+
+<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -18,12 +23,43 @@
   <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
   <link rel="stylesheet" href="{% static 'finalHome.css' %}">
 
+  <script>
+    var user = '{{ request.user }}'
 
+    function getToken(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+    const csrftoken = getToken('csrftoken');
+  </script>
 
 </head>
 
 <body>
   <!-- partial:index.partial.html -->
+  {% if not request.user.is_authenticated %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-warning alert-dismissible fade show my-0" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endif %}
 
   <nav class="navbar fixed-top navbar-custom navbar-expand-sm navbar-mainbg ">
 
@@ -59,30 +95,30 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'cart' %}"><i class="fas fa-cart-arrow-down"></i>
 
-              
+
 
               {% if request.user.is_authenticated %}
-                   
-                    Cart({{ci}})
 
-                {% else %}
-                Cart(0)
+              Cart({{ci}})
+
+              {% else %}
+              Cart(0)
               {% endif %}
             </a>
           </li>
-          
+
 
           {% if request.user.is_authenticated %}
 
-                <a href="{% url 'logout' %}" class="btn btn-warning my-2 mx-2">Logout</a>
-                
-                
-                {% else %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i>Login</a>
-                </li>
-                <a href="{% url 'signup' %}" class="btn btn-warning my-2 mx-2">Sign up</a>
-                {% endif %}
+          <a href="{% url 'logout' %}" class="btn btn-warning my-2 mx-2">Logout</a>
+
+
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i>Login</a>
+          </li>
+          <a href="{% url 'signup' %}" class="btn btn-warning my-2 mx-2">Sign up</a>
+          {% endif %}
 
         </nav>
 
@@ -92,6 +128,11 @@
 
   </nav>
 
+  {% endcomment %}
+
+
+
+  {% block content %}
 
 
   <div class="all-contents">
@@ -138,143 +179,173 @@
       </div>
     </main>
 
-    <img src="images/Selling_Banners.png" style="align-items: center; justify-content: center;">
+    <img src="{% static 'images/Selling_Banners.png' %}" style="align-items: center; justify-content: center;">
 
     <!--TOP PRODUCTS -->
+
     <div class="grid-top-products">
+
+      {% for i in product %}
       <div class="top-products">
         <div class="column">
-          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
-              alt="sample96" />
-            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
+          <figure data-product={{ i.id }} data-action="add" class="snip1418 hover update-cart">
+
+            <img src="/media/{{i.images}}" alt="sample96" />
+
+            {% if request.user.is_authenticated %}
+            <div class="add-to-cart"> <i class="ion-android-add"></i>
+              <span>Add to Cart</span>
+              <a href=""></a>
+            </div>
+            {% endif %}
+
             <figcaption>
-              <h3>Kurie Secco</h3>
-              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
+              <h4><b>{{ i.product_name }}</b></h4>
+              <p>{{ i.desc }}.</p>
               <div class="price">
-                <s>$24.00</s>$19.00
+                <s>Rs.{{i.price}}</s> Rs.{{i.our_price}}
               </div>
-            </figcaption><a href="#"></a>
-          </figure>
-        </div>
-        <div class="column">
-          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
-              alt="sample96" />
-            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
-            <figcaption>
-              <h3>Kurie Secco</h3>
-              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
-              <div class="price">
-                <s>$24.00</s>$19.00
-              </div>
-            </figcaption><a href="#"></a>
-          </figure>
-        </div>
-        <div class="column">
-          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
-              alt="sample96" />
-            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
-            <figcaption>
-              <h3>Kurie Secco</h3>
-              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
-              <div class="price">
-                <s>$24.00</s>$19.00
-              </div>
-            </figcaption><a href="#"></a>
-          </figure>
-        </div>
-        <div class="column">
-          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
-              alt="sample96" />
-            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
-            <figcaption>
-              <h3>Kurie Secco</h3>
-              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
-              <div class="price">
-                <s>$24.00</s>$19.00
-              </div>
-            </figcaption><a href="#"></a>
-          </figure>
-        </div>
-        <div class="column">
-          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
-              alt="sample96" />
-            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
-            <figcaption>
-              <h3>Kurie Secco</h3>
-              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
-              <div class="price">
-                <s>$24.00</s>$19.00
-              </div>
-            </figcaption><a href="#"></a>
-          </figure>
-        </div>
-        <div class="column">
-          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
-              alt="sample96" />
-            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
-            <figcaption>
-              <h3>Kurie Secco</h3>
-              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
-              <div class="price">
-                <s>$24.00</s>$19.00
-              </div>
-            </figcaption><a href="#"></a>
-          </figure>
-        </div>
-        <div class="column">
-          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
-              alt="sample96" />
-            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
-            <figcaption>
-              <h3>Kurie Secco</h3>
-              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
-              <div class="price">
-                <s>$24.00</s>$19.00
-              </div>
-            </figcaption><a href="#"></a>
-          </figure>
-        </div>
-        <div class="column">
-          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
-              alt="sample96" />
-            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
-            <figcaption>
-              <h3>Kurie Secco</h3>
-              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
-              <div class="price">
-                <s>$24.00</s>$19.00
-              </div>
-            </figcaption><a href="#"></a>
-          </figure>
-        </div>
-        <div class="column">
-          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
-              alt="sample96" />
-            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
-            <figcaption>
-              <h3>Kurie Secco</h3>
-              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
-              <div class="price">
-                <s>$24.00</s>$19.00
-              </div>
-            </figcaption><a href="#"></a>
-          </figure>
-        </div>
-        <div class="column">
-          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
-              alt="sample96" />
-            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
-            <figcaption>
-              <h3>Kurie Secco</h3>
-              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
-              <div class="price">
-                <s>$24.00</s>$19.00
-              </div>
-            </figcaption><a href="#"></a>
+            </figcaption>
+
           </figure>
         </div>
       </div>
-      <img class="new-arrivals-img" src="images/New_Arrivals.png">
+      {% endfor %}
+
+
+
+
+      <!-- 
+        <div class="column">
+          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
+              alt="sample96" />
+            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
+            <figcaption>
+              <h3>Kurie Secco</h3>
+              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
+              <div class="price">
+                <s>$24.00</s>$19.00
+              </div>
+            </figcaption><a href="#"></a>
+          </figure>
+        </div>
+
+        <div class="column">
+          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
+              alt="sample96" />
+            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
+            <figcaption>
+              <h3>Kurie Secco</h3>
+              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
+              <div class="price">
+                <s>$24.00</s>$19.00
+              </div>
+            </figcaption><a href="#"></a>
+          </figure>
+        </div>
+
+        <div class="column">
+          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
+              alt="sample96" />
+            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
+            <figcaption>
+              <h3>Kurie Secco</h3>
+              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
+              <div class="price">
+                <s>$24.00</s>$19.00
+              </div>
+            </figcaption><a href="#"></a>
+          </figure>
+        </div>
+
+        <div class="column">
+          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
+              alt="sample96" />
+            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
+            <figcaption>
+              <h3>Kurie Secco</h3>
+              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
+              <div class="price">
+                <s>$24.00</s>$19.00
+              </div>
+            </figcaption><a href="#"></a>
+          </figure>
+        </div>
+
+        <div class="column">
+          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
+              alt="sample96" />
+            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
+            <figcaption>
+              <h3>Kurie Secco</h3>
+              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
+              <div class="price">
+                <s>$24.00</s>$19.00
+              </div>
+            </figcaption><a href="#"></a>
+          </figure>
+        </div>
+
+        <div class="column">
+          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
+              alt="sample96" />
+            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
+            <figcaption>
+              <h3>Kurie Secco</h3>
+              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
+              <div class="price">
+                <s>$24.00</s>$19.00
+              </div>
+            </figcaption><a href="#"></a>
+          </figure>
+        </div>
+
+        <div class="column">
+          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
+              alt="sample96" />
+            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
+            <figcaption>
+              <h3>Kurie Secco</h3>
+              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
+              <div class="price">
+                <s>$24.00</s>$19.00
+              </div>
+            </figcaption><a href="#"></a>
+          </figure>
+        </div>
+
+        <div class="column">
+          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
+              alt="sample96" />
+            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
+            <figcaption>
+              <h3>Kurie Secco</h3>
+              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
+              <div class="price">
+                <s>$24.00</s>$19.00
+              </div>
+            </figcaption><a href="#"></a>
+          </figure>
+        </div>
+
+        <div class="column">
+          <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
+              alt="sample96" />
+            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
+            <figcaption>
+              <h3>Kurie Secco</h3>
+              <p>If you do the job badly enough, sometimes you don't get asked to do it again. </p>
+              <div class="price">
+                <s>$24.00</s>$19.00
+              </div>
+            </figcaption><a href="#"></a>
+          </figure>
+        </div> -->
+
+      <!-- </div> -->
+
+
+      <img class="new-arrivals-img" src="{% static 'images/New_Arrivals.png' %}">
       <div class="new-arrivals">
 
         <div class="column">
@@ -347,7 +418,7 @@
     </div>
 
     <div>
-      <img class="aboutus-img" src="images/About_Us.png">
+      <img class="aboutus-img" src="{% static 'images/About_Us.png' %}">
     </div>
     <div class="footer">
       <div class="contain">
@@ -388,22 +459,41 @@
       </div>
     </div>
   </div>
+
+
+
+
+
+
   <!-------------------DOG SUBPAGE NAVBAR------------------->
   <div class="dog-subpage">
     <div class="grid-products">
-      <div class="column">
-        <figure class="snip1418"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample85.jpg"
-            alt="sample85" />
-          <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
-          <figcaption>
-            <h3>dog Doux</h3>
-            <p>All this modern technology just makes people try to do everything at once.</p>
-            <div class="price">
-              <s>$24.00</s>$19.00
+      
+      {% for prod in dog_products %}
+        <div class="column">
+          <figure data-product={{ prod.id }} data-action="add" class="snip1418 hover update-cart">
+
+            <img src="/media/{{prod.images}}" alt="sample85" />
+
+            {% if request.user.is_authenticated %}
+            <div class="add-to-cart"> <i class="ion-android-add"></i>
+              <span>Add to Cart</span>
+              <a href=""></a>
             </div>
-          </figcaption><a href="#"></a>
-        </figure>
-      </div>
+            {% endif %}
+
+            <figcaption>
+              <h4><b>{{ prod.product_name }}</b></h4>
+              <p>{{ prod.desc }}.</p>
+              <div class="price">
+                <s>Rs.{{prod.price}}</s> Rs.{{prod.our_price}}
+              </div>
+            </figcaption>
+            
+          </figure>
+        </div>
+      {% endfor %}
+      <!-- 
       <div class="column">
         <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
             alt="sample96" />
@@ -417,6 +507,7 @@
           </figcaption><a href="#"></a>
         </figure>
       </div>
+
       <div class="column">
         <figure class="snip1418"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample92.jpg"
             alt="sample92" />
@@ -430,6 +521,7 @@
           </figcaption><a href="#"></a>
         </figure>
       </div>
+
       <div class="column">
         <figure class="snip1418"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample92.jpg"
             alt="sample92" />
@@ -457,6 +549,7 @@
           </figcaption><a href="#"></a>
         </figure>
       </div>
+
       <div class="column">
         <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
             alt="sample96" />
@@ -470,6 +563,7 @@
           </figcaption><a href="#"></a>
         </figure>
       </div>
+
       <div class="column">
         <figure class="snip1418"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample92.jpg"
             alt="sample92" />
@@ -483,6 +577,7 @@
           </figcaption><a href="#"></a>
         </figure>
       </div>
+
       <div class="column">
         <figure class="snip1418"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample92.jpg"
             alt="sample92" />
@@ -496,6 +591,7 @@
           </figcaption><a href="#"></a>
         </figure>
       </div>
+
       <div class="column">
         <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
             alt="sample96" />
@@ -509,6 +605,7 @@
           </figcaption><a href="#"></a>
         </figure>
       </div>
+
       <div class="column">
         <figure class="snip1418 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample96.jpg"
             alt="sample96" />
@@ -521,10 +618,13 @@
             </div>
           </figcaption><a href="#"></a>
         </figure>
-      </div>
+      </div> -->
+
     </div>
   </div>
   </div>
+
+
   <!--CAT SUBPAGE NAV-->
   <div class="cat-subpage">
     <div class="grid-products">
@@ -940,7 +1040,7 @@
   </div>
 
 
-
+  {% endblock content %}
 
 
   <!-- partial -->

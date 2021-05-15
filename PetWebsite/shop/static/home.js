@@ -5,15 +5,16 @@ $(".hover").mouseleave(
 );
 
 $(document).ready(function(){
+
   $("#dog-nav").click(function(){
     $(".all-contents").hide();
     $(".dog-subpage").show();
     $(".cat-subpage").hide();
     $(".bird-subpage").hide();
     $(".fish-subpage").hide();
-
-   
   });
+
+
   $("#cat-nav").click(function(){
     $(".all-contents").hide();
     $(".dog-subpage").hide();
