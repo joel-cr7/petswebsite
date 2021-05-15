@@ -1,3 +1,123 @@
+/* @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  
+  
+}
+body{
+  background-image: url("images/background-edit.png");
+  background-size: cover;
+}
+.card{
+  
+  width: 500px;
+  margin: auto;
+  margin-top: 25px;
+}
+
+button{
+  background-image: linear-gradient(to right, #FF8008, #FFC837);
+  
+}
+
+
+.btn.btn-primary{
+    border-radius: 10px;
+    width: 80%;
+    height: 120%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    
+}
+.btn.btn-primary p{
+  font-size: 12px;
+  font-weight: 600;
+  margin: auto;
+}
+#passwordHelpBlock p{
+  font-size: 9px;
+}
+.inside-content{
+  
+  display: block;
+  width: 100%;
+  height: 8%;
+  margin-top: 3%;
+
+}
+.col-form-label p{
+  font-size: 12px;
+  font-weight: 600;
+  height: 50%;
+}
+.header-text h1{
+  text-align: center;
+  font-size: 25px;
+
+}
+.link-login {
+
+  text-align: center;
+  margin-top: 2%;
+  
+}
+
+.link-login a{
+  text-decoration: solid;
+  color: #FF8008;
+  font-size: 12px;
+}
+
+
+
+label{
+  display: block;
+  height: 2px;
+  
+}
+lottie-player{
+  margin-left: 350px;
+  margin-top: -8%;
+}
+
+@media (min-device-width: 320px) and (max-device-width: 480px) {
+  
+  .card{
+    margin-top: 15%;
+    width: 300px;
+    height: 650px;
+  }
+  .inside-content{
+    font-size: 15px;
+    font-weight: 300;
+  }
+  .header-text h1{
+    font-size: 20px;
+  }
+  .btn.btn-primary h1{
+    font-size: 15px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+  .form-check p{
+    font-size: 12px;
+    font-weight: 200;
+    
+  }
+  .link-login a{
+    font-size: 12px;
+  }
+  body{
+    background-image: url("images/mobile-background-edit.png");
+  }
+} */
+
+
+
 html {
   height: 100%;
 }

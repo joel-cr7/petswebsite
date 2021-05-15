@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from accounts.forms import RegistrationForm, cust_form
 from django.http import HttpResponse
+from shop.models import *
 
 
 # from django.http import HttpResponse
@@ -20,7 +21,17 @@ def login_view(request):
 
         if user is not None:    # if username and password is correct
             login(request, user)
-            return render(request, 'shop/home.html')
+
+            # customer=request.user.customer
+            # order, created=Order.objects.get_or_create(customer=customer, complete=False)
+            # items=order.orderitem_set.all()
+            # cartItems = order.get_cart_items
+            # products= Product.objects.all()
+
+            # return render(request, 'shop/homeM.html', {'product':products, 'cartItems':cartItems})
+            return redirect('home')
+
+            # return render(request, 'shop/homeM.html')
         else:       # if username or password incorrect
             context['login_form']="Invalid username or password !!"
 
@@ -107,10 +118,10 @@ def registration_view(request):
 #     else:
 #         return render(request,'accounts/signup.html')
 
-
-
-
 #To logout the user
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('start_page')
+
+
+

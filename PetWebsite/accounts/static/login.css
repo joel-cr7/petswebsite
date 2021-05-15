@@ -1,4 +1,67 @@
-html {
+/* @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Century Gothic', sans-serif;
+  font-weight: 500;
+}
+body{
+    background-image: url("images/background-edit.png");
+    background-size: cover;
+  }
+
+.card{
+    margin: auto;
+    margin-top: 5%;
+    width: 500px;
+    height: 350px;
+  }
+button{
+    background-image: linear-gradient(to right, #FF8008, #FFC837);
+    padding-top: 100px;
+  }
+
+.inside-content{
+    margin-top: 6%;
+}
+.header-text{
+    text-align: center;
+    font-size: 40px;
+}
+.btn.btn-primary label{
+    margin: -1.5%;
+    font-size: 30px;
+
+}
+.link-signup {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 1.5%;
+}
+
+.link-signup a{
+    text-decoration: none;
+    color: #FF8008;
+    font-size: 14px;
+}
+
+.forgot-password{
+    font-size: 12px;
+    text-align: center;
+    margin-top: 3%;
+}
+.forgot-password a{
+    text-decoration: none;
+    color: #FF8008;
+    font-size: 14px;
+}
+ */
+
+
+
+
+ html {
     height: 100%;
   }
   body {

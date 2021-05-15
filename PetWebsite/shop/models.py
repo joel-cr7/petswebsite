@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 User=get_user_model()
 # Create your models here.
 
-class Product(models.Model):     #please not when ever u create a model, register it to the admin of that app or file
+class Product(models.Model):     #please note when ever u create a model, register it to the admin of that app or file
     product_id=models.AutoField
     product_name=models.CharField(max_length=30)
     category=models.CharField(max_length=50,default="")
@@ -51,8 +51,8 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-	product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-	order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+	product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+	order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True)
 	quantity = models.IntegerField(default=0, null=True, blank=True)
 	date_added = models.DateTimeField(auto_now_add=True)
 

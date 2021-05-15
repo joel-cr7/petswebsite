@@ -5,6 +5,8 @@ from accounts.urls import urlpatterns as account_urls
 urlpatterns = [
     path('success/', views.success, name="success"),
     path('payment/', views.final_payment, name="payment"),
-    path('', views.home, name="home"),
+    path('', views.start_page, name="start_page"),
+    path('home/', views.home, name="home"),
     path('cart/', views.cart, name="cart"),
+    path('update_item/', views.updateItem, name="update_item"),
 ] + account_urls

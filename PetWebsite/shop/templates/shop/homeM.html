@@ -120,15 +120,23 @@
 
       {% for i in product %}
         <div class="column">
-          <figure class="snip1418"><img src='/media/{{i.images}}' alt="sample85" />
-            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
+          <figure data-product={{ i.id }} data-action="add" class="snip1418 update-cart">
+            <img src='/media/{{i.images}}' alt="sample85" />
+
+            {% if request.user.is_authenticated %}
+            <div  class="add-to-cart "> <i class="ion-android-add"></i>
+              <span>Add to Cart</span>
+              <a href="#"></a>
+            </div>
+            {% endif %}
+
             <figcaption>
-              <h3>{{ i.product_name }}</h3>
+              <h4><b>{{ i.product_name }}</b></h4>
               <p>{{ i.desc }}.</p>
               <div class="price">
                 <s>Rs.{{i.price}}</s> Rs.{{i.our_price}}
               </div>
-            </figcaption><a href="#"></a>
+            </figcaption>
           </figure>
         </div>
       {% endfor %}
