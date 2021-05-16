@@ -7,30 +7,40 @@ from . models import *
 from django.contrib import messages
 from django.http import JsonResponse
 import json
+
+
 # Create your views here.
-
-
 def home(request):
+        products= Product.objects.all()  
+        item1 = Product.objects.filter(product_name__icontains='double bowl')
+        item2 = Product.objects.filter(product_name__icontains='cat tunnel')
+        item3 = Product.objects.filter(product_name__icontains='clear glass')
+        item4 = Product.objects.filter(product_name__icontains='tees for dog')
+        item5 = Product.objects.filter(product_name__icontains='automatic')
+        new_arrivals = [item1,item2,item3,item4,item5]
+        all_prods = []
+        j=1
+        for i in products:
+                if j<=15:
+                        all_prods.append(i)
+                        j+=1
+                else:
+                        break
+        dog_products = Product.objects.filter(category__icontains='dog')
+        cat_products = Product.objects.filter(category__icontains='cat')
+        fish_products = Product.objects.filter(category__icontains='fish')
+        bird_products = Product.objects.filter(category__icontains='bird')
+
         if request.user.is_authenticated:
                 customer=request.user.customer
                 order, created=Order.objects.get_or_create(customer=customer, complete=False)
                 items=order.orderitem_set.all()
                 cartitems = order.get_cart_items
-                products= Product.objects.all()  
-                all_prods = []
-                j=1
-                for i in products:
-                        if j<=15:
-                                all_prods.append(i)
-                                j+=1
-                        else:
-                                break
-
-                dog_products = Product.objects.filter(category__icontains='dog')
-
-                return render(request, 'shop/finalHome.html', {'product':all_prods, 'ci':cartitems, 'dog_products':dog_products})  
+                return render(request, 'shop/finalHome.html', {'product':all_prods, 'ci':cartitems, 'dog_products':dog_products, 
+                'cat_products':cat_products, 'fish_products':fish_products, 'bird_products':bird_products,'new_arrivals':new_arrivals})  
         else:
-                return redirect('login')
+                return render(request, 'shop/finalHome.html', {'product':all_prods, 'dog_products':dog_products, 
+                'cat_products':cat_products, 'fish_products':fish_products, 'bird_products':bird_products, 'new_arrivals':new_arrivals})  
 
 
         
@@ -38,24 +48,14 @@ def home(request):
 def start_page(request):
         if request.user.is_authenticated:
                 return redirect('home')
-                # customer=request.user.customer
-                # order, created=Order.objects.get_or_create(customer=customer, complete=False)
-                # items=order.orderitem_set.all()
-                # cartitems = order.get_cart_items
-                # products= Product.objects.all()   
-                # all_prods = []
-                # j=1
-                # for i in products:
-                #         if j<=15:
-                #                 all_prods.append(i)
-                #                 j+=1
-                #         else:
-                #                 break
- 
-                # # n= len(products)
-                # return render(request, 'shop/finalHome.html', {'product':all_prods, 'ci':cartitems})
         else:
                 products= Product.objects.all() 
+                item1 = Product.objects.filter(product_name__icontains='double bowl')
+                item2 = Product.objects.filter(product_name__icontains='cat tunnel')
+                item3 = Product.objects.filter(product_name__icontains='clear glass')
+                item4 = Product.objects.filter(product_name__icontains='tees for dog')
+                item5 = Product.objects.filter(product_name__icontains='automatic')
+                new_arrivals = [item1,item2,item3,item4,item5]
                 all_prods = []
                 j=1
                 for i in products:
@@ -64,7 +64,7 @@ def start_page(request):
                                 j+=1
                         else:
                                 break
-                return render(request, 'shop/finalHome.html', {'product':all_prods})
+                return render(request, 'shop/finalHome.html', {'product':all_prods, 'new_arrivals':new_arrivals})
 
 def cart(request):
         if request.user.is_authenticated:
@@ -73,13 +73,10 @@ def cart(request):
                 items=order.orderitem_set.all()
                 cartItems = order.get_cart_items
                 pay=order.get_cart_total*100
-                context={'items':items, 'order':order,'money':pay, 'cartItems':cartItems}
+                context={'items':items, 'order':order,'money':pay, 'ci':cartItems}
                 return render(request, 'shop/cart.html', context)
         else:
-                messages.error(request,'Please Login or Signup to continue shopping !!')
                 return redirect('home')
-                # items=[]
-                # order={'get_cart_total':0, 'get_cart_items':0}
                 
         
 

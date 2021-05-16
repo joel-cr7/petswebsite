@@ -143,3 +143,8 @@ function updateUserOrder(productId, action){
   })
 
 }
+
+
+function alert_message(){
+  alert("Please Login or Signup to continue shopping !!");
+}

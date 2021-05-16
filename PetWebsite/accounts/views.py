@@ -121,7 +121,7 @@ def registration_view(request):
 #To logout the user
 def logout_view(request):
     logout(request)
-    return redirect('start_page')
+    return redirect('home')
 
 
 

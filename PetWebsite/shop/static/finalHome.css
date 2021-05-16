@@ -350,11 +350,13 @@ i {
   transition: all 0.3s ease-out;
 }
 .snip1418 img {
+  cursor: pointer;
   max-width: 100%;
   vertical-align: top;
   position: relative;
 }
 .snip1418 .add-to-cart {
+  cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;
@@ -372,6 +374,7 @@ i {
   transform-origin: 100% 0;
 }
 .snip1418 .add-to-cart i {
+  cursor: pointer;
   display: inline-block;
   margin-right: 10px;
   width: 40px;
@@ -382,10 +385,12 @@ i {
   font-size: 1.4em;
 }
 .snip1418 figcaption {
+  cursor: pointer;
   padding: 20px;
 }
 .snip1418 h3,
 .snip1418 p {
+  cursor: pointer;
   margin: 0;
 }
 .snip1418 h3 {
