@@ -46,7 +46,7 @@
                     <p>{{item.product.product_name}}</p>
                 </div>
                 <div style="flex:1">
-                    <p>${{item.product.our_price}}</p>
+                    <p>Rs. {{item.product.our_price}}</p>
                 </div>
                 <div style="flex:1">
                     <p class="quantity">{{item.quantity}}</p>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div style="flex:1">
-                    <p>${{item.get_total}}</p>
+                    <p>Rs. {{item.get_total}}</p>
                 </div>
             </div>
             {% endfor %}

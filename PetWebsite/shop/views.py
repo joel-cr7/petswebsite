@@ -115,7 +115,7 @@ def updateItem(request):
 
 def search(request):
         kw = request.GET.get("keyword")
-        result = Product.objects.filter(Q(category__icontains=kw) | Q(desc__icontains=kw))
+        result = Product.objects.filter(Q(category__icontains=kw) | Q(desc__icontains=kw) | Q(product_name__icontains=kw))
         if request.user.is_authenticated:
                 customer=request.user.customer
                 order, created=Order.objects.get_or_create(customer=customer, complete=False)
