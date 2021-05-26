@@ -1,11 +1,10 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-
 User=get_user_model()
 # Create your models here.
 
-class Product(models.Model):     #please note when ever u create a model, register it to the admin of that app or file
+class Product(models.Model):    
     product_id=models.AutoField
     product_name=models.CharField(max_length=30)
     category=models.CharField(max_length=50,default="")
@@ -17,7 +16,6 @@ class Product(models.Model):     #please note when ever u create a model, regist
     def __str__(self):
         return self.product_name
 
-
 class Customer(models.Model):
 	user = models.OneToOneField(User, null=False, blank=False, on_delete=models.CASCADE)
 	name = models.CharField(max_length=200, null=True)
@@ -25,7 +23,6 @@ class Customer(models.Model):
 
 	def __str__(self):
 		return self.name
-
 
 class Order(models.Model):
 	customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
@@ -47,8 +44,6 @@ class Order(models.Model):
 		orderitems = self.orderitem_set.all()
 		total = sum([item.quantity for item in orderitems])
 		return total 
-
-
 
 class OrderItem(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)

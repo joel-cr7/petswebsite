@@ -42,19 +42,6 @@ $(document).ready(function(){
    
   });
 
-  /*$("#toys-nav").click(function(){
-    $(".food-section").show();
-    $(".all-contents").hide();
-    $(".food-subpage").show();
-    $(".dog-subpage").hide();
-    $(".cat-subpage").hide();
-    $(".bird-subpage").hide();
-    $(".fish-subpage").hide();
-    $(".turtle-subpage").hide();
-   
-  });
-*/
-
   $("#dog-food").click(function(){
     $(".dog-subpage").show();
     $(".food-subpage").hide();
@@ -101,7 +88,6 @@ $(document).ready(function(){
 
 
 // Javascript logic for cart
-
 var updateBtns = document.getElementsByClassName('update-cart')
 
 for(var i=0; i<updateBtns.length; i++){
@@ -143,7 +129,6 @@ function updateUserOrder(productId, action){
   })
 
 }
-
 
 function alert_message(){
   alert("Please Login or Signup to continue shopping !!");

@@ -6,8 +6,8 @@ from accounts.views import login_view, registration_view, logout_view
 from . models import *
 from django.contrib import messages
 from django.http import JsonResponse
+from django.db.models import Q
 import json
-
 
 # Create your views here.
 def home(request):
@@ -43,8 +43,6 @@ def home(request):
                 'cat_products':cat_products, 'fish_products':fish_products, 'bird_products':bird_products, 'new_arrivals':new_arrivals})  
 
 
-        
-
 def start_page(request):
         if request.user.is_authenticated:
                 return redirect('home')
@@ -79,8 +77,6 @@ def cart(request):
                 return redirect('home')
                 
         
-
-
 def final_payment(request):
         amount = 50000
         order_currency = 'INR'
@@ -94,15 +90,10 @@ def success(request):
     return HttpResponse("successfully paid !!")
 
 
-
-
 def updateItem(request):
         data = json.loads(request.body)
         productId = data['productId']
         action = data['action']
-
-        print('Action: ',action)
-        print('ProductId: ',productId)
 
         customer = request.user.customer
         product = Product.objects.get(id=productId)
@@ -122,3 +113,14 @@ def updateItem(request):
         return JsonResponse('item was added', safe=False) 
 
 
+def search(request):
+        kw = request.GET.get("keyword")
+        result = Product.objects.filter(Q(category__icontains=kw) | Q(desc__icontains=kw))
+        if request.user.is_authenticated:
+                customer=request.user.customer
+                order, created=Order.objects.get_or_create(customer=customer, complete=False)
+                items=order.orderitem_set.all()
+                cartitems = order.get_cart_items
+                return render(request, 'shop/search.html',{'result':result, 'ci':cartitems})
+        else:
+                return render(request, 'shop/search.html',{'result':result})

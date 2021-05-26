@@ -1,0 +1,44 @@
+{% extends 'shop/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="grid-top-products" >
+<h2 style="padding-top: 30px;"> Search Results For <span class="text-info">"{{request.GET.keyword}}"</span></h2>
+<hr>
+{% if result %}
+{% for i in result %}
+    <div class="top-products">
+      <div class="column">
+        <figure data-product={{ i.id }} data-action="add" class="snip1418 hover update-cart">
+
+          <img src="/media/{{i.images}}" alt="sample96" />
+
+          {% if request.user.is_authenticated %}
+          <div class="add-to-cart"> <i class="ion-android-add"></i>
+            <span>Add to Cart</span>
+            <a href=""></a>
+          </div>
+          {% endif %}
+
+          <figcaption>
+            <h4><b>{{ i.product_name }}</b></h4>
+            <p>{{ i.desc }}.</p>
+            <div class="price">
+              <s>Rs.{{i.price}}</s> Rs.{{i.our_price}}
+            </div>
+          </figcaption>
+
+        </figure>
+      </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+
+    <h1 style="text-align: center;"><strong> No Results Found</strong></h1>
+    {% endif %}
+
+</div>
+
+
+{% endblock content %}
